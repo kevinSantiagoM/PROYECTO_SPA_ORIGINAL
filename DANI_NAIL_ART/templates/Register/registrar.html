@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<h1>Signin</h1>
 
 <p>
-{{error}}
+    {{error}}
 </p>
 
 <form action="" method="POST" class="signin-form">
+<h1>Signin</h1>
 {% csrf_token %}
 {{form.as_p}}
 <button>
@@ -19,7 +19,9 @@
 <style>
     /* styles.css */
 .signin-form {
-    max-width: 300px;
+    position: relative;
+    top: 6rem;
+    width: 400px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;

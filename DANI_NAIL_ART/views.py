@@ -14,7 +14,7 @@ def incio(request):
     })
 
 def servicios(request):
-    return render(request, 'Servcios/Servicios.html')
+    return render(request, 'Servicios/Servicios.html')
 
 def regitro(request):
     if request.method == 'GET':
@@ -50,6 +50,20 @@ def inicio_sesion(request):
 def signout(request):
     logout(request)
     return redirect('inincio')
+
+# def añadir_Servicios( request ):
+#     if request.method == 'POST':
+#         return render( request, 'Servicios/Servicios.html', {
+#             'form':Agendar_Servicio()
+#         })
+#     else:
+#         nombre = request.POST['nombre']
+#         descripcion = request.POST['descripcion']
+#         disponibilidad = request.POST['disponibilidad']
+#         precio = request.POST['precio']
+#         imagen = request.POST['imagen']
+#         Servicio.objects.create(nombre=nombre, descripcion=descripcion, disponibilidad=disponibilidad, precio=precio, imagen=imagen)
+#         return redirect('/Agregar_Servicio')
 
 
 def añadir_Servicios( request ):

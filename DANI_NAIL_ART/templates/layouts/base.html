@@ -1,61 +1,32 @@
+{% block content %} 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'CSS/base.css' %}">
+
     <title>Document</title>
 </head>
 <body>
     <nav class="navbar">
     <ul>
+        {% else %}
+
         <li>
         <a href="{% url 'Registrar' %}" class="nav-link">Registrate</a>
         </li>
         <li>
         <a href="{% url 'InicioSeccion' %}" class="nav-link">Incia sesion</a>
         </li>
+        {% endif %}
+
         <li>
             <a href="{% url 'InicioSeccion' %}">Cerrar sesion</a>
         </li>
     </ul>
     </nav>
 
-    <style>
-        *{
-            padding: 0;
-            margin: 0;
-        }
-
-    .navbar {
-        overflow: hidden;
-        position: relative;
-        width: rem;
-        background-color: #ff4081;
-        box-shadow: rgb(38, 57, 77) 0px 10px 20px -15px;
-        height: 5rem;
-    } 
-
-    .navbar a {
-        float: left;
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 20px 24px;
-        text-decoration: none;
-    }
-
-    .navbar a:hover {
-        background-color: #ddd;
-        color: black;
-    }
-
-    ul {
-        list-style: none;
-    }
-
-    </style>
-
-    {% block content %} 
     {% endblock %}
 </body>
 </html>

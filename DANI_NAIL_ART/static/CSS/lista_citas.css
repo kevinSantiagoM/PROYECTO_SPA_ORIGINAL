@@ -1,0 +1,47 @@
+table {
+    width: 60%; 
+    margin: 0 auto; 
+    border-collapse: collapse; 
+    border-radius: 23px; 
+}
+
+th, td {
+    padding: 10px; 
+    border: 1px solid #e0e0e0; 
+}
+
+th {
+    background-color: #ff99cc; 
+    color: white; 
+}
+
+
+.cancelar{
+    position: relative;
+    left: 8rem;
+    top: -1.0rem;
+    width: 5rem;
+    height: 30px;
+    border-radius: 23px;
+    background: #f177a0;
+    border: none;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+}
+
+.editar{
+    position: relative;
+    left: 2rem;
+    top: 1rem;
+    width: 5rem;
+    height: 30px;
+    border-radius: 23px;
+    background: #f177a0;
+    border: none;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+}

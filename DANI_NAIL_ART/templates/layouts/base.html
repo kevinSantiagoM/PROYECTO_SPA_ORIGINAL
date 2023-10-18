@@ -1,32 +1,37 @@
-{% block content %} 
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'CSS/base.css' %}">
-
-    <title>Document</title>
+    <head>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday@1.8.0/css/pikaday.min.css">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pikaday@1.8.0/pikaday.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pikaday@1.8.0/plugins/pikaday.jquery.min.js"></script>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="{% static 'CSS/base.css' %}">
+        
+        <title>Document</title>
 </head>
 <body>
     <nav class="navbar">
-    <ul>
-        {% else %}
-
-        <li>
-        <a href="{% url 'Registrar' %}" class="nav-link">Registrate</a>
-        </li>
-        <li>
-        <a href="{% url 'InicioSeccion' %}" class="nav-link">Incia sesion</a>
-        </li>
-        {% endif %}
-
-        <li>
+        <ul>
+            <li>
+                <a href="{% url 'Registrar' %}" class="nav-link">Registrate</a>
+            </li>
+            <li>
+                <a href="{% url 'InicioSeccion' %}" class="nav-link">Incia sesion</a>
+            </li>
+            <li>
             <a href="{% url 'InicioSeccion' %}">Cerrar sesion</a>
-        </li>
-    </ul>
+            </li>
+            <li>
+                <a href="{% url 'lista_citas' %}">Historial de Citas</a>
+            </li>
+            <li>
+                <a href="{% url 'crear_cita' %}">Crear Cita</a>
+            </li>
+        </ul>
     </nav>
-
-    {% endblock %}
 </body>
 </html>
+{% block content %} 
+{% endblock %}

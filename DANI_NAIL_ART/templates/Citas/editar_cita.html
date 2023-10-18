@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>editar_cita</title>
+</head>
+<body>
+    {% extends "base.html" %}
+
+        {% block title %}Editar Cita{% endblock %}
+
+        {% block content %}
+        <div class="container">
+
+            <h2>Editar Cita</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Guardar Cambios</button>
+            </form>
+            <a href="{% url 'lista_citas' %}">Volver al historial de citas</a>
+        </div>
+            <style>
+            .container {
+            max-width: 400px; 
+            margin: 5rem;
+            padding: 30px;
+            border: 1px solid #ccc;
+            background-origin: 20px;
+            
+        }
+
+        h2 {
+            font-size: 36px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"], input[type="date"], input[type="time"], button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            /* quiero que el boton quede centralizado */
+            margin: 0 auto;
+            display: block;
+            width: 10rem;
+            height: 40px;
+            border-radius: 5px;
+            font-weight: bold;
+            left: 5rem;
+            top: 0rem;
+            width: 10rem;
+            position: relative;
+            cursor: pointer;
+            background: #ff4081;
+            font-size: 1em;
+            cursor: pointer;
+            color: white;
+        
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+            </style>
+                
+        {% endblock %}
+
+</body>
+</html>

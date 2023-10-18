@@ -1,6 +1,12 @@
 from django.db import models
 from django.core.validators import MinValueValidator
 
+
+class Cita(models.Model):
+    servicio = models.CharField(max_length=100)
+    fecha = models.DateField()
+    hora = models.TimeField()
+
 class Servicio(models.Model):
     nombre = models. CharField(max_length=100)
     descripcion = models.CharField(max_length=100)

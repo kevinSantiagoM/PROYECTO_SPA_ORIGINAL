@@ -1,0 +1,63 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'CSS/crear_cita.css' %}">
+        
+    <title>Crear cita</title>
+</head>
+<body>
+
+
+    <div class="container">
+            
+            <h2>Crear Cita</h2>
+        <form method="post" id="citaForm">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" id="guardarCita">Guardar</button>
+        </form>
+        <a href="{% url 'lista_citas' %}">Volver al historial de citas</a>
+    </div>
+    
+    <script>
+        $(document).ready(function () {
+            // Inicializar los widgets de fecha y hora
+            $('#id_fecha').pikaday();
+            $('#id_hora').pikaday({ format: 'HH:mm' });
+    
+            // Manejar el clic en el botón "Guardar"
+            $('#guardarCitaBtn').on('click', function () {
+                // Obtener la fecha y hora seleccionadas
+                var fecha = $('#id_fecha').val();
+                var hora = $('#id_hora').val();
+    
+                // Aquí debes realizar una verificación en el servidor para determinar si la fecha y hora ya están en uso.
+                // Supongamos que tienes una variable 'citaExistente' que es true si la cita ya existe, de lo contrario, es false.
+    
+                var citaExistente = false; // Debes modificar esto con la lógica real.
+    
+                if (citaExistente) {
+                    // Mostrar la ventana modal si la cita ya existe
+                    $('#citaExistenteModal').modal('show');
+                } else {
+                    // Si la cita no existe, envía el formulario
+                    $('#citaForm').submit();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

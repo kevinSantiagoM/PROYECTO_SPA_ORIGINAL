@@ -1,4 +1,4 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/base2.html' %}
 {% load static %}
 
 {% block content %}
@@ -6,12 +6,41 @@
     <form action="" method="POST">
         <h1>Inicia Sesión</h1>
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-field">
+            {{ form.username.label_tag }}
+            {{ form.username }}
+        </div>
+        <div class="form-field">
+            {{ form.password.label_tag }}
+            <div class="password-toggle">
+                {{ form.password }}
+                <i id="toggle-password" class="fa fa-eye" aria-hidden="true"></i>
+            </div>
+        </div>
         {{ error }}<br>
         <button class="btn btn-primary">Iniciar</button>
     </form>
 </div>
 
 <link rel="stylesheet" type="text/css" href="{% static 'CSS/estilo_inicio.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#toggle-password").click(function () {
+            var passwordField = $("#id_password");
+            var passwordFieldType = passwordField.attr("type");
+
+            if (passwordFieldType === "password") {
+                passwordField.attr("type", "text");
+                $(this).removeClass("fa-eye").addClass("fa-eye-slash");
+            } else {
+                passwordField.attr("type", "password");
+                $(this).removeClass("fa-eye-slash").addClass("fa-eye");
+            }
+        });
+    });
+</script>
 
 {% endblock %}

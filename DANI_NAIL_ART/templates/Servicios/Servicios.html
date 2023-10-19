@@ -1,8 +1,33 @@
 {% extends 'layouts/base.html' %}
+{% load static %}
 
 {% block content %}
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'CSS/base.css' %}">
 
-<a href="{% url 'Agregar_Servicio' %}">Agregar Servicios</a>
+    <title>Document</title>
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li>
+                <a href="{% url 'crear_cita' %}">Crear Cita</a>
+            </li>
+            <li>
+                <a href="{% url 'lista_citas' %}">Historial de Citas</a>
+            </li>
+            <li>
+                <a href="{% url 'InicioSeccion' %}">Cerrar sesion</a>
+            </li>
+        </ul>
+    </nav>
+    
+</body>
+</html> -->
 
 <h1>{{ title }}</h1>
 <h1>hola como estas, bienvenido</h1>

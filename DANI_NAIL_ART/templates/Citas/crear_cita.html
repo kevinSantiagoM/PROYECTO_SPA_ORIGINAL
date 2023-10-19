@@ -21,7 +21,7 @@
 
 
     <div class="container">
-            
+
             <h2>Crear Cita</h2>
         <form method="post" id="citaForm">
             {% csrf_token %}
@@ -30,33 +30,38 @@
         </form>
         <a href="{% url 'lista_citas' %}">Volver al historial de citas</a>
     </div>
-    
+
     <script>
         $(document).ready(function () {
-            // Inicializar los widgets de fecha y hora
-            $('#id_fecha').pikaday();
-            $('#id_hora').pikaday({ format: 'HH:mm' });
-    
-            // Manejar el clic en el botón "Guardar"
-            $('#guardarCitaBtn').on('click', function () {
-                // Obtener la fecha y hora seleccionadas
-                var fecha = $('#id_fecha').val();
-                var hora = $('#id_hora').val();
-    
-                // Aquí debes realizar una verificación en el servidor para determinar si la fecha y hora ya están en uso.
-                // Supongamos que tienes una variable 'citaExistente' que es true si la cita ya existe, de lo contrario, es false.
-    
-                var citaExistente = false; // Debes modificar esto con la lógica real.
-    
-                if (citaExistente) {
-                    // Mostrar la ventana modal si la cita ya existe
-                    $('#citaExistenteModal').modal('show');
-                } else {
-                    // Si la cita no existe, envía el formulario
-                    $('#citaForm').submit();
-                }
-            });
+        // Inicializar los widgets de fecha y hora
+        $('#id_fecha').pikaday();
+        $('#id_hora').pikaday({ format: 'HH:mm' });
+
+        // Manejar el clic en el botón "Guardar"
+        $('#guardarCita').on('click', function (e) {
+            e.preventDefault();  // Evitar que el formulario se envíe automáticamente
+
+            // Obtener la fecha y hora seleccionadas
+            var fecha = $('#id_fecha').val();
+            var hora = $('#id_hora').val();
+
+            // Aquí debes realizar una verificación en el servidor para determinar si la fecha y hora ya están en uso.
+            // Supongamos que tienes una variable 'citaExistente' que es true si la cita ya existe, de lo contrario, es false.
+            var citaExistente = false; // Debes modificar esto con la lógica real.
+
+            if (citaExistente) {
+                // Mostrar la alerta con SweetAlert2 si la cita ya existe
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'La cita ya existe.'
+                });
+            } else {
+                // Si la cita no existe, envía el formulario
+                $('#citaForm').submit();
+            }
         });
+    });
     </script>
 </body>
 </html>

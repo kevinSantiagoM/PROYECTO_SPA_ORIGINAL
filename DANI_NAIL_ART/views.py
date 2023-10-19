@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_list_or_404
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.http import JsonResponse, HttpResponseRedirect
@@ -79,7 +79,7 @@ def crear_cita(request):
                 # Si no existe, guarda la nueva cita
                 form.save()
                 # Redirige al usuario a la lista de citas o la página que desees
-                return HttpResponseRedirect(reverse('Citas/lista_citas'))
+                return HttpResponseRedirect(reverse('lista_citas'))
         else:
             # Manejar errores de validación del formulario
             errors = form.errors.as_json()
@@ -93,12 +93,13 @@ def lista_citas(request):
     return render(request, 'Citas/lista_citas.html', {'citas': citas})
 
 def editar_cita(request, cita_id):
-    cita = get_list_or_404(Cita, pk=cita_id)
+    cita = get_object_or_404(Cita, pk=cita_id)
+    
     if request.method == 'POST':
         form = CitaForm(request.POST, instance=cita)
         if form.is_valid():
             form.save()
-            return redirect('Citas/lista_citas')
+            return redirect('lista_citas')
     else:
         form = CitaForm(instance=cita)
     return render(request, 'Citas/editar_cita.html', {'form': form, 'cita': cita})

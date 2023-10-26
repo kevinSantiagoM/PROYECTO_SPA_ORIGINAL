@@ -9,6 +9,7 @@
 
 /* Estilos para el encabezado h1 */
 h1 {
+    color: #ff4081;
     font-size: 28px;
     margin-bottom: 20px;
 }
@@ -16,9 +17,9 @@ h1 {
 /* Estilos para el formulario */
 form {
     background-color: #f5f5f5;
-    border: 1px solid #ccc;
+    border: 2px solid #ff4081 ;
     padding: 20px;
-    border-radius: 5px;
+    border-radius: 23px;
 }
 
 /* Estilos para los campos de entrada de texto */
@@ -48,4 +49,9 @@ button {
 .error {
     color: #ff0000;
     margin-top: 10px;
+}
+
+.nav-link1 {
+    display: flex;
+    justify-content: flex-end;
 }

@@ -5,12 +5,10 @@ from django.http import JsonResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from .forms import Agendar_Servicio
-from .models import Servicio
-from .forms import CitaForm
-from .models import Cita
+from .forms import CitaForm, Agendar_Servicio
+from .models import Cita, Servicio
 from django.urls import reverse
-
+from django.contrib import messages
 
 def incio(request):
     titulo = "hello bich"
@@ -18,8 +16,10 @@ def incio(request):
         'titulo':titulo
     })
 
-def servicios(request):
-    return render(request, 'Servicios/Servicios.html')
+def Menu(request):
+    return render(request, 'Menu.html')
+
+#--------------------REGISTRARSE-----------------------------
 
 def regitro(request):
     if request.method == 'GET':
@@ -38,6 +38,7 @@ def regitro(request):
 
         return render(request, 'Register/registrar.html', {"form": UserCreationForm, "error": "Passwords did not match."})
 
+#----------------------INICIO DE SESIÓN----------------------------
 
 def inicio_sesion(request):
     if request.method == 'GET':
@@ -50,12 +51,16 @@ def inicio_sesion(request):
             return render(request, 'Login/inicio.html', {"form": AuthenticationForm, "error": "Username or password is incorrect."})
 
         login(request, user)
-        return redirect('Servicios')
+        return redirect('Menu')
+    
+#-----------------CERRAR SESIÓN-----------------------------
     
 @login_required
 def signout(request):
     logout(request)
     return redirect('inincio')
+
+#------------------CREAR CITA----------------------
 
 def crear_cita(request):
     if request.method == 'POST':
@@ -88,9 +93,13 @@ def crear_cita(request):
         form = CitaForm()
     return render(request, 'Citas/crear_cita.html', {'form': form})
 
+#-------------------LISTA DE CITAS-----------------------------
+
 def lista_citas(request):
     citas = Cita.objects.all()
     return render(request, 'Citas/lista_citas.html', {'citas': citas})
+
+#---------------------------EDITAR CITA-------------------------------------
 
 def editar_cita(request, cita_id):
     cita = get_object_or_404(Cita, pk=cita_id)
@@ -104,29 +113,18 @@ def editar_cita(request, cita_id):
         form = CitaForm(instance=cita)
     return render(request, 'Citas/editar_cita.html', {'form': form, 'cita': cita})
 
+#----------------------ELIMINAR CITA----------------------------------
+
 def eliminar_cita(request, cita_id):
     try:
         cita = Cita.objects.get(id=cita_id)
         cita.delete()
+        messages.success(request, 'La cita ha sido eliminada exitosamente.')
     except Cita.DoesNotExist:
-        pass  # Puedes manejar este caso de acuerdo a tus necesidades.
+        messages.error(request, 'La cita no se encontró o no pudo ser eliminada.')
 
-    return redirect(redirect_to='Citas/lista_citas') 
-
-# def añadir_Servicios( request ):
-#     if request.method == 'POST':
-#         return render( request, 'Servicios/Servicios.html', {
-#             'form':Agendar_Servicio()
-#         })
-#     else:
-#         nombre = request.POST['nombre']
-#         descripcion = request.POST['descripcion']
-#         disponibilidad = request.POST['disponibilidad']
-#         precio = request.POST['precio']
-#         imagen = request.POST['imagen']
-#         Servicio.objects.create(nombre=nombre, descripcion=descripcion, disponibilidad=disponibilidad, precio=precio, imagen=imagen)
-#         return redirect('/Agregar_Servicio')
-
+    return redirect(reverse('lista_citas'))
+#---------------------------AÑADIR SERVICIO---------------------------------
 
 def añadir_Servicios( request ):
     if request.method == 'POST':
@@ -144,12 +142,28 @@ def añadir_Servicios( request ):
                 precio=precio,
                 imagen=imagen,
             )
-            return redirect('/servicios')
+            return redirect('/Servicios_agendados')
     else:
         form = Agendar_Servicio()
 
-    return render(request, 'Servcios/Agregar_Servcios.html', {
+    return render(request, 'Servicios/Agregar_Servcios.html', {
         'form': form, 
     })
+
+
+
 # Create your views here.
 
+# def añadir_Servicios( request ):
+#     if request.method == 'POST':
+#         return render( request, 'Servicios/Servicios.html', {
+#             'form':Agendar_Servicio()
+#         })
+#     else:
+#         nombre = request.POST['nombre']
+#         descripcion = request.POST['descripcion']
+#         disponibilidad = request.POST['disponibilidad']
+#         precio = request.POST['precio']
+#         imagen = request.POST['imagen']
+#         Servicio.objects.create(nombre=nombre, descripcion=descripcion, disponibilidad=disponibilidad, precio=precio, imagen=imagen)
+#         return redirect('/Agregar_Servicio')

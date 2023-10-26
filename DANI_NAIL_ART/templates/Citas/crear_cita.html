@@ -21,14 +21,12 @@
 
 
     <div class="container">
-
             <h2>Crear Cita</h2>
         <form method="post" id="citaForm">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" id="guardarCita">Guardar</button>
-        </form>
-        <a href="{% url 'lista_citas' %}">Volver al historial de citas</a>
+        </form>         
     </div>
 
     <script>

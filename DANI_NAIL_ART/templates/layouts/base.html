@@ -11,27 +11,29 @@
 
         <title>Document</title>
 </head>
+
 <body>
     <nav class="navbar">
         <ul>
-            <!-- <li>
-                <a href="{% url 'Registrar' %}" class="nav-link">Registrate</a>
+            <li>
+                <a href="{% url 'Menu' %}">Menu</a>
             </li>
             <li>
-                <a href="{% url 'InicioSeccion' %}" class="nav-link">Incia sesion</a>
-            </li> -->
-            <li>
-                <a href="{% url 'lista_citas' %}">Historial de Citas</a>
+                <a href="{% url 'crear_cita' %}">Crear cita</a>
             </li>
             <li>
-                <a href="{% url 'crear_cita' %}">Crear Cita</a>
-                <li>
-                <a href="{% url 'InicioSeccion' %}">Cerrar sesion</a>
-                </li>
+                <a href="{% url 'Agregar_Servicio' %}">Añadir servicio</a>
+            </li>
+            <li>
+                <a href="{% url 'lista_citas' %}">Historial de citas</a>
+            </li>
+            <li>
+                <a href="{% url 'InicioSeccion' %}">Cerrar sesión</a>
             </li>
         </ul>
     </nav>
 </body>
+
 </html>
 {% block content %}
 {% endblock %}

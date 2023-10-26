@@ -9,6 +9,6 @@ urlpatterns = [
     path('citas_agendadas/', views.lista_citas, name='lista_citas'),
     path('editar/<int:cita_id>/', views.editar_cita, name='editar_cita'),
     path('eliminar_cita/<int:cita_id>/', views.eliminar_cita, name='eliminar_cita'),
-    path('Servicios', views.servicios, name='Servicios'),
+    path('Menu', views.Menu, name='Menu'),
     path('Agregar_servicio/', views.añadir_Servicios, name='Agregar_Servicio')
 ]

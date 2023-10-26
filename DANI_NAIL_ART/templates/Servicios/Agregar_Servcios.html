@@ -5,11 +5,10 @@
 <h1>Agregar un servicio</h1>
 
 <div>
-    <form method="POST">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn-biblioteca">Agregar</button>
+        <button type="submit">Agregar</button>
     </form>
 </div>
-
 {% endblock %}

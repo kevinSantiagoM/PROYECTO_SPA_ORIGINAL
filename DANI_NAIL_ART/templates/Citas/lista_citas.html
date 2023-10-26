@@ -1,19 +1,18 @@
-
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     
     <title>Lista de Citas</title>
 </head>
-{% extends "layouts/base.html" %}
 <body>
+    {% extends "layouts/base.html" %}
 
-    
+{% block title %}Historial Citas{% endblock %}
 
 {% block content %}
     <h2>Historial</h2>
@@ -29,122 +28,103 @@
         <body>
             <div class="tabla">
 
-                {% for cita in citas %}
-                <tr>
-                    <td>{{ cita.servicio }}</td>
-                    <td>{{ cita.fecha }}</td>
-                    <td>{{ cita.hora }}</td>
-                    <td>
-
-                        <form action="{% url 'editar_cita' cita.id %}">
-                            {% csrf_token %}
-                            <button class="editar" type="submit">Editar</button>
-                        </form>
-                        
-                        <form method="post" action="{% url 'eliminar_cita' cita.id %}">
-                            {% csrf_token %}
-                            <button class="cancelar" type="button" onclick="confirmarEliminacion()">Cancelar</button>
-                        </form>
-                        
-                    </td>
-                </tr>
-            </div>
-                {% endfor %}
-            </body>
+            {% for cita in citas %}
+            <tr>
+                <td>{{ cita.servicio }}</td>
+                <td>{{ cita.fecha }}</td>
+                <td>{{ cita.hora|time:"g:i A" }}</td>
+                <td>
+                    <form action="{% url 'editar_cita' cita.id %}">
+                        {% csrf_token %}
+                        <button class="editar" type="submit">Editar</button>
+                    </form>
+                    
+                    <form method="post" action="{% url 'eliminar_cita' cita.id %}">
+                        {% csrf_token %}
+                        <button class="eliminar" type="button" onclick="confirmDelete('{{ cita.id }}')">Eliminar</button>
+                    </form>
+                    
+                </td>
+            </tr>
+            {% endfor %}
+            
+        </body>
     </table>
-    <a href="{% url 'crear_cita' %}">Crear nueva cita</a>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
-    <script>
-        function confirmarEliminacion(citaId) {
-        Swal.fire({
-        title: '¿Estás seguro?',
-        text: 'No podrás revertir esto.',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, eliminarlo',
-    }).then((result) => {
-        if (result.isConfirmed) {
-          // Realizar una solicitud AJAX para eliminar la cita
-        $.ajax({
-            url: '/eliminar_cita/' + citaId + '/', // Reemplaza con la URL correcta
-            type: 'POST',
-            data: {
-            csrfmiddlewaretoken: '{{ csrf_token }}',
-            },
-            success: function (data) {
-            if (data.message) {
-                Swal.fire('¡Eliminado!', data.message, 'success');
-                // Recargar la página o realizar cualquier otra acción después de eliminar
-                location.reload();
-            } else {
-                Swal.fire('Error', 'No se pudo eliminar la cita.', 'error');
-            }
-            },
-            error: function () {
-            Swal.fire('Error', 'No se pudo eliminar la cita.', 'error');
-            },
-        });
-        }
-    });
-    
-        }   
-    </script>
 
     <style>
+
         table {
-    width: 60%; 
-    margin: 0 auto; 
-    border-collapse: collapse; 
-    border-radius: 23px; 
-}
+            width: 60%; 
+            margin: 0 auto; 
+            border-collapse: collapse; 
+            border-radius: 23px; 
+        }
 
-th, td {
-    padding: 10px; 
-    border: 1px solid #e0e0e0; 
-}
+        th, td {
+            padding: 10px; 
+            border: 1px solid #e0e0e0; 
+        }
 
-th {
-    background-color: #ff99cc; 
-    color: white; 
-}
+        th {
+            background-color: #ff99cc; 
+            color: white; 
+        }
 
+        .editar{
+            position: relative;
+            left: 2rem;
+            top: 1rem;
+            width: 5rem;
+            height: 30px;
+            border-radius: 23px;
+            background: #f177a0;
+            border: none;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+        }
+    /* Otras reglas de estilo... */
 
-.cancelar{
-    position: relative;
-    left: 8rem;
-    top: -1.0rem;
-    width: 5rem;
-    height: 30px;
-    border-radius: 23px;
-    background: #f177a0;
-    border: none;
-    font-size: 1em;
-    font-weight: 600;
-    cursor: pointer;
-    color: white;
-}
+    .eliminar {
+        position: relative;
+        left: 4rem; /* Ajusta la posición según tus necesidades */
+        top: 1rem;
+        width: 5rem;
+        height: 30px;
+        border-radius: 23px;
+        background: #f177a0; /* Color de fondo rojo o tu elección */
+        border: none;
+        font-size: 1em;
+        font-weight: 600;
+        cursor: pointer;
+        color: white;
+    }
+</style>
 
-.editar{
-    position: relative;
-    left: 2rem;
-    top: 1rem;
-    width: 5rem;
-    height: 30px;
-    border-radius: 23px;
-    background: #f177a0;
-    border: none;
-    font-size: 1em;
-    font-weight: 600;
-    cursor: pointer;
-    color: white;
-}
     </style>
+
     
+
+    <script>
+        function confirmDelete(citaId) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "No podrás revertir esto.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminarlo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir al usuario a la vista de eliminación
+                    window.location.href = "{% url 'eliminar_cita' 0 %}".replace("0", citaId);
+                }
+            });
+        }
+        </script>
+
 {% endblock %}
 
 </body>

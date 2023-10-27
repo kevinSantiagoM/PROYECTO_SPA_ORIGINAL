@@ -38,11 +38,11 @@
                         {% csrf_token %}
                         <button class="editar" type="submit">Editar</button>
                     </form>
-                    
                     <form method="post" action="{% url 'eliminar_cita' cita.id %}">
                         {% csrf_token %}
                         <button class="eliminar" type="button" onclick="confirmDelete('{{ cita.id }}')">Eliminar</button>
                     </form>
+                    
                     
                 </td>
             </tr>
@@ -88,8 +88,8 @@
 
     .eliminar {
         position: relative;
-        left: 4rem; /* Ajusta la posición según tus necesidades */
-        top: 1rem;
+        left: 9rem; /* Ajusta la posición según tus necesidades */
+        top: -0.9rem;
         width: 5rem;
         height: 30px;
         border-radius: 23px;

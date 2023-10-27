@@ -14,6 +14,7 @@ class Servicio(models.Model):
 # Create your models here.
 
 class Cita(models.Model):
-    servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE, null=True)
+    servicio = models.CharField(max_length=50)
+    # servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE, null=True)
     fecha = models.DateField()
     hora = models.TimeField()

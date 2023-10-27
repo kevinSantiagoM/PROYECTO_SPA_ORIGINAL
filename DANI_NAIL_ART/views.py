@@ -10,6 +10,7 @@ from .models import Cita, Servicio
 from django.urls import reverse
 from django.contrib import messages
 
+
 def incio(request):
     titulo = "hello bich"
     return render(request, 'Login/inicio.html', {
@@ -53,14 +54,14 @@ def inicio_sesion(request):
         login(request, user)
         return redirect('Menu')
     
-#-----------------CERRAR SESIÓN-----------------------------
+#----------------------CERRAR SESIÓN-----------------------------
     
 @login_required
 def signout(request):
     logout(request)
     return redirect('inincio')
 
-#------------------CREAR CITA----------------------
+#------------------------CREAR CITA-------------------------------
 
 def crear_cita(request):
     if request.method == 'POST':
@@ -93,7 +94,7 @@ def crear_cita(request):
         form = CitaForm()
     return render(request, 'Citas/crear_cita.html', {'form': form})
 
-#-------------------LISTA DE CITAS-----------------------------
+#-------------------LISTA DE CITAS------------------------------------------
 
 def lista_citas(request):
     citas = Cita.objects.all()
@@ -124,6 +125,7 @@ def eliminar_cita(request, cita_id):
         messages.error(request, 'La cita no se encontró o no pudo ser eliminada.')
 
     return redirect(reverse('lista_citas'))
+
 #---------------------------AÑADIR SERVICIO---------------------------------
 
 def añadir_Servicios( request ):

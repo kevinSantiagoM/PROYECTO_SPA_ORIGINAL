@@ -2,28 +2,75 @@
 {% load static %}
 
 {% block content %}
-<h1>{{ title }}</h1>
-<center>
-    <h1>Hola bienvenido</h1>
-</center>
-<style>
-    table, th, td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 3px 6px;
-        margin: 1rem;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'CSS/principal.css' %}">
+    <title>Document</title>
+</head>
+<body><br><br>
 
-<table>
-    <tr>
-        <th>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos delectus corporis in dignissimos rerum perferendis iste quis, cumque necessitatibus vero, pariatur quasi temporibus labore modi nobis ducimus vitae architecto quam?
-        Ducimus id quasi, tempore explicabo, suscipit asperiores saepe aliquid ea voluptas modi voluptatibus illum sit nam? Consectetur atque praesentium facilis aliquam numquam? Consequuntur id blanditiis mollitia perferendis quidem impedit placeat?
-        Quo ipsam itaque eius quisquam aspernatur sapiente quis assumenda placeat laborum nisi blanditiis laudantium suscipit amet ratione nobis, beatae consequatur facilis odio, numquam tempore. Minima, modi eveniet? Suscipit, cum sed.
-        Veritatis iste ex hic omnis voluptas fugit, ullam dignissimos eaque incidunt est temporibus accusamus consectetur nihil quam totam magnam dolor? Maiores quia suscipit, vitae laboriosam praesentium est quos in accusamus.</th>
-    </tr>
-</table>
+    <div>
+        <center>
+            <img src="{% static 'images/logoempresa.png' %}" class="logo1" alt="">
+        </center>
+    </div>
+    </div><br><br><br>
 
+    <div>
+        <h1>Nuestro salón de estética</h1>
+        <div>
+            <hr>
+            <p></p>
+        </div>
+        <img src="{% static 'images/imgservicios1.jpg' %}" class="logo2" alt="">
+    </div><br><br><br><br><br>
 
+    <div>
+        <p class="texto">Si buscas un look único y exclusivo, estás en el lugar más indicado, DANI NAIL ART pone a tu disposición sus servicios de maquillaje y estética para dar con ese estilo que mejor encaje contigo.</p>
+    </div><br><br><br>
 
+    <div class="informacion1">
+        <h1>Servicios que ofrecemos</h1>
+            <div>
+                <hr>
+                <p class="texto2">
+                    Somos un equipo de profesionales especialistas en el ámbito de la belleza tanto femenina como masculina. Nos encargaremos de hacer que brilles con luz propia en tu día a día, brindándote todo su asesoramiento profesional para diseñar un look único para ti.</p><br>
+                    
+                    <p class="texto3">Para garantizar la mejor calidad y la máxima duración, en Salón de belleza Carmen utilizamos las últimas técnicas y productos del mercado en cosmética, buscando siempre el mejor de los resultados.</p>
+                </div>
+            </div>
+            
+            <div class="imgservicios">
+                <img src="{% static 'images/imgservicios.jpg' %}" alt="">
+            </div>  
+
+            <div class="informacion2">
+                <p class="suptitulo">En esta empresa encontras servicios de estética como:</p><br>
+                <p>• Manicura (parafina, IBX, gel, acrílico y semipermanente)</p><br>
+                <p>• Pedicura</p><br>
+                <p>• Extensión, lifting y microblending de cejas</p><br>
+            </div><br><br><br><br><br>
+
+            <div>
+                <h1>Atencion al clientes</h1>
+                <div>
+                    <hr>
+                    <p></p>
+                </div>
+                <h2 class="contacto">Correo electronico</h2>
+                <h3 class="correo">• melodaniela2811@gmail.com</h3><br>
+                <h2 class="contacto">Numero telefonico</h2>
+                <h3 class="numero">• 3192973854</h3>
+            </div><br><br><br>
+            
+            <div class="partefinal">
+                <h4>Salón de Belleza DANI NAIL ART</h4>
+            </div>
+
+    
+</body>
+</html>
 {% endblock %}

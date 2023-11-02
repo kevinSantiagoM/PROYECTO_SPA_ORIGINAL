@@ -1,0 +1,241 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+.logo1 {
+    position: relative;
+    width: 15rem;
+    top: 3rem;
+    height: 10rem;
+}
+
+.slider {
+    width: auto;
+    margin: auto;
+    overflow: hidden;
+}
+
+.slider ul {
+    display: flex;
+    padding: 0;
+    width: 200%;
+
+    animation: cambio 20s infinite;
+}
+
+.slider li {
+    width: 100%;
+}
+
+.slider img {
+    width: 100%;
+}
+
+@keyframes cambio {
+    0%{margin-left: 0;}
+    20%{margin-left: 0;}
+
+    25%{margin-left: -100%;}
+    50%{margin-left: -100%;}
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.menu {
+    position: relative;
+    top: 10px;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#menu {
+    display: none;
+}
+
+.menu-icono {
+    width: 25px;
+    
+}
+
+.menu label {
+    cursor: pointer;
+    display: none;
+}
+
+@media(max-width:991px) {
+    .content {
+        min-height: 70px;
+    }
+
+    .menu {
+        top: 0;
+        padding: 20px;
+    }
+
+    .menu label {
+        display: initial;
+    }
+
+    .menu .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        display: none;
+    }
+
+    .menu .navbar ul li {
+        width: 100%;
+    }
+
+    #menu:checked ~ .navbar {
+        display: initial;
+    }
+}
+
+.col-md-12 {
+    position: relative;
+    text-align: center;
+    top: 3rem;
+    width: 50%;
+    left: 3rem;
+}
+
+.col-sm-6 {
+    width: 50%;
+}
+
+h1 {
+    position: relative;
+    left: 6rem;
+    font-size: 36px;
+    color: #498e88;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-align: left;
+}
+
+h2 {
+    position: relative;
+    left: 10rem;
+    font-size: 23px;
+    color: #5a5a5a;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    text-align: left;
+}
+
+.texto {
+    position: relative;
+    left: 3rem;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.botones {
+    position: relative;
+    left: 15rem;
+}
+
+.Catalogo {
+    color: #fff;
+    background-color: #48a099;
+    border-color: #fff;
+    border-radius: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 17px;
+}
+
+.Servicios {
+    color: #fff;
+    background-color: #48a099;
+    border-color: #fff;
+    border-radius: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 17px;
+}
+
+.Informacion {
+    position: relative;
+    top: 3rem;
+    color: #fff;
+    background-color: #48a099;
+    border-color: #fff;
+    border-radius: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-size: 17px;
+}
+
+
+.final {
+    position: relative;
+    top: 10rem;
+}
+
+.imagen-final {
+    position: relative;
+    left: 2rem;
+    width: 95%;
+}
+
+.mini-catalogo1 {
+    position: relative;
+    width: 360px;
+    top: 19rem;
+    left: 3rem;
+}
+
+.mini-catalogo2 {
+    position: relative;
+    width: 360px;
+    top: 2.4rem;
+    left: 37rem;
+}
+
+.mini-catalogo3 {
+    position: relative;
+    width: 360px;
+    top: -14.2rem;
+    left: 70rem;
+}
+
+.horario {
+    position: relative;
+    width: 20rem;
+    left: 3rem;
+    top: -11rem;
+
+
+}
+
+.servicios {
+    position: relative;
+    top: -7.8rem;
+    left: 34rem;
+}
+
+.contacto {
+    position: relative;
+    top: -22.8rem;
+    left: 67rem;
+}

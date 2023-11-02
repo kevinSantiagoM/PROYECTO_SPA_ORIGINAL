@@ -10,7 +10,6 @@ from .models import Cita, Servicio
 from django.urls import reverse
 from django.contrib import messages
 
-
 def incio(request):
     titulo = "hello bich"
     return render(request, 'Login/inicio.html', {

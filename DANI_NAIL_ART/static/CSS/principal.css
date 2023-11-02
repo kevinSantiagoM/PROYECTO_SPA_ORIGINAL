@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+}
+
+.logo1 {
+    display: flex;
+    justify-content: flex-end;
+    width: 10rem;
+    height: 10rem;
+}
+
+.informacion1 {
+    position: relative;
+    justify-content: center;
+    top: 4rem;
+}
+
+h1 {
+    position: relative;
+    width: 50rem;
+    left: 2rem;
+    font-size: 36px;
+    color: #ff4081;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-align: left;
+}
+
+h3 {
+    position: relative;
+    width: 50rem;
+    left: 2rem;
+    font-size: 23px;
+    color: #5a5a5a;
+    font-family: sans-serif;
+    font-weight: 500;
+    text-align: left;
+}
+
+hr {
+    position: relative;
+    left: 2rem;
+    width: 92rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 2px solid #ff4081;
+}
+
+.logo2 {
+    display: flex;
+    justify-content: flex-end;
+    height: 10rem;
+}
+
+.texto {
+    margin-left: 31rem;
+    margin-top: -15rem;
+    width: 20rem;
+}
+
+.texto2 {
+    margin-left: 20rem;
+    left: 20rem;
+    width: 55rem;
+}
+
+.texto3 {
+    margin-left: 20rem;
+    width: 57rem;
+}
+
+.imgservicios {
+    margin-top: 6rem;
+    margin-left: 20rem;
+    padding: 4px;
+    line-height: 1.42857143;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    height: auto;
+}
+
+.suptitulo {
+    margin-top: -14rem;
+    margin-left: -1rem;
+}
+
+.informacion2 {
+    width: 22rem;
+    margin-top: -5rem;
+    margin-left: 45rem;
+}
+
+.contacto {
+    margin-left: 2rem;
+}
+
+.correo {
+    width: 50rem;
+    margin-left: 1rem;
+    font-size: 23px;
+    color: #5a5a5a;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+}
+
+.numero {
+    width: 50rem;
+    margin-left: 1rem;
+    font-size: 23px;
+    color: #5a5a5a;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+}
+
+.partefinal {
+    padding: 10px 20px 10px;
+    background: #828282;
+    border-top: 1px solid #373737;
+    -ms-border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    -ms-border-bottom-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

@@ -7,7 +7,7 @@ class Servicio(models.Model):
     descripcion = models.CharField(max_length=100)
     disponibilidad = models.BooleanField()
     precio = models.DecimalField(max_digits=10, decimal_places=3, validators=[MinValueValidator(0)])
-    imagen = models.ImageField(null=True, blank=True)
+    imagen = models.ImageField()
 
     def __str__(self) -> str:
         return self.nombre

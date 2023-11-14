@@ -15,6 +15,10 @@ class Servicio(models.Model):
 
 class Cita(models.Model):
     servicio = models.CharField(max_length=50)
-    # servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE, null=True)
+    fecha = models.DateField()
+    hora = models.TimeField()
+
+class CitasCreadas(models.Model):
+    servicio = models.ForeignKey(Servicio, on_delete=models.CASCADE, null=True)
     fecha = models.DateField()
     hora = models.TimeField()

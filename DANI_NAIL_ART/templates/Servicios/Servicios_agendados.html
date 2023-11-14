@@ -1,6 +1,77 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% block content %}
 
+
+<br><br>
 <h1>Servicios agendados</h1>
+<br><br>
+<hr><br><br>
 
-{% endblock %}  
+{% for servicio in servicio %}
+<div class="estilo">
+        {% if servicio.imagen %}
+            <h2>{{ servicio.nombre }}</h2>
+            <img src="{{ servicio.imagen.url }}" alt="">
+        {% else %}
+            <img src="{% static 'images/fondo.png' %}" alt="">
+        {% endif %}
+        {% if servicio.disponibilidad %}
+            <p class="disponible">Disponible</p>
+        {% else %}
+            <p class="no-disponible">No disponible</p>
+        {% endif %}
+        
+        <p>Precio: ${{ servicio.precio }}</p>
+    </div>
+{% endfor %}
+
+        <style>
+
+            h1 {
+                color: #333;
+                font-family: 'Arial', sans-serif;
+                text-align: center;
+            }
+
+            h2{
+                color: #333;
+                font-family: 'Arial', sans-serif;
+                text-align: center;
+            }
+        
+            .estilo {
+                margin-left: 2rem;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                padding: 2rem;
+                margin-bottom: 20px;
+                text-align: center;
+                background-color: #f8f8f8;
+                display: inline-block;
+                margin-right: 20px;
+            }
+
+            img {
+                border-radius: 5px;
+                margin-top: 10px;
+                width: 90px; /* Establece el tamaño fijo para todas las imágenes */
+                height: 90px; /* Ajusta la altura según tus preferencias */
+            }
+
+            p {
+                color: #666;
+                font-family: 'Arial', sans-serif;
+            }
+
+            .disponible {
+                color: green;
+                font-weight: bold;
+            }
+
+            .no-disponible {
+                color: red;
+                font-weight: bold;
+            }
+        </style>
+{% endblock %}

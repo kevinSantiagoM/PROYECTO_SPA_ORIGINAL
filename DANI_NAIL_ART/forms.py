@@ -13,7 +13,8 @@ class CitaForm(forms.ModelForm):
         }
 
 
-class Agendar_Servicio(forms.Form):
+class Agendar_Servicio(forms.ModelForm):
     class Meta:
         model = Servicio
-        fields = ['nombre', 'descripcion', 'disponibilidad', 'precio', 'imagen']
+        fields = ['nombre', 'disponibilidad', 'precio', 'imagen']
+

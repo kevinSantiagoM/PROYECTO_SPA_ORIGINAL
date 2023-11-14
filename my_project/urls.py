@@ -24,5 +24,3 @@ urlpatterns = [
     path('',include('DANI_NAIL_ART.urls'))
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, documen_root=settings.MEDIA_ROOT)

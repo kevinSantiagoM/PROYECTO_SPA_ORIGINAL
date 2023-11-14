@@ -34,9 +34,9 @@ def regitro(request):
                 login(request, user)
                 return redirect('InicioSeccion')
             except IntegrityError:
-                return render(request, 'Register/registrar.html', {"form": UserCreationForm, "error": "Username already exists."})
+                return render(request, 'Register/registrar.html', {"form": UserCreationForm, "error": "Nombre de usuario ya existe."})
 
-        return render(request, 'Register/registrar.html', {"form": UserCreationForm, "error": "Passwords did not match."})
+        return render(request, 'Register/registrar.html', {"form": UserCreationForm, "error": "Las contraseñas no coinciden."})
 
 #----------------------INICIO DE SESIÓN----------------------------
 
@@ -132,13 +132,11 @@ def añadir_Servicios( request ):
         form = Agendar_Servicio(request.POST, request.FILES)
         if form.is_valid():
             nombre = form.cleaned_data['nombre']
-            descripcion =form.cleaned_data['descripcion']
             disponibilidad = form.cleaned_data['disponibilidad']
             precio = form.cleaned_data['precio']
             imagen = form.cleaned_data['imagen']
             Servicio.objects.create(
                 nombre=nombre,
-                descripcion=descripcion,
                 disponibilidad=disponibilidad,
                 precio=precio,
                 imagen=imagen,
@@ -151,20 +149,34 @@ def añadir_Servicios( request ):
         'form': form, 
     })
 
+# -----------------EDITAR SERVICIO----------------------------
+
+def editar_servicio(request, servicio_id):
+    servicio = get_object_or_404(Servicio, id=servicio_id)
+    if request.method == 'POST':
+        form = Agendar_Servicio(request.POST, request.FILES, instance=servicio)
+        if form.is_valid():
+            form.save()
+            return redirect('/Servicios_agendados')
+    else:
+        form = Agendar_Servicio(instance=servicio)
+
+    return render(request, 'Servicios/Agregar_Servcios.html', {
+        'form': form, 
+    })
+
+# ----------------------------------------------------------
+
+def Servicios(request):
+    servicio = Servicio.objects.all()
+    return render(request, 'Servicios/Servicios_agendados.html', {
+        'servicio':servicio,
+    })
+
+# ------------------------------------------------------------
+
+# ----------------CATEGORIA---------------------------
 
 
-# Create your views here.
 
-# def añadir_Servicios( request ):
-#     if request.method == 'POST':
-#         return render( request, 'Servicios/Servicios.html', {
-#             'form':Agendar_Servicio()
-#         })
-#     else:
-#         nombre = request.POST['nombre']
-#         descripcion = request.POST['descripcion']
-#         disponibilidad = request.POST['disponibilidad']
-#         precio = request.POST['precio']
-#         imagen = request.POST['imagen']
-#         Servicio.objects.create(nombre=nombre, descripcion=descripcion, disponibilidad=disponibilidad, precio=precio, imagen=imagen)
-#         return redirect('/Agregar_Servicio')
+# -----------------------------------------------------

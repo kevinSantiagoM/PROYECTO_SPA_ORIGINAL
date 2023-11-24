@@ -48,7 +48,7 @@ def inicio_sesion(request):
             request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
             
-            return render(request, 'Login/inicio.html', {"form": AuthenticationForm, "error": "Username or password is incorrect."})
+            return render(request, 'Login/inicio.html', {"form": AuthenticationForm, "error": "Nombre de usuario o contraseña incorrecta"})
 
         login(request, user)
         return redirect('Menu')

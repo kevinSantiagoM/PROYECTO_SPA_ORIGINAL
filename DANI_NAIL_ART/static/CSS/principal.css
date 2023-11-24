@@ -29,6 +29,17 @@ h1 {
     text-align: left;
 }
 
+h2 {
+    position: relative;
+    width: 50rem;
+    left: 2rem;
+    font-size: 36px;
+    color: #ff4081;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    text-align: left;
+}
+
 h3 {
     position: relative;
     width: 50rem;
@@ -81,6 +92,7 @@ hr {
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 4px;
+    width: 23.2rem;
     height: auto;
 }
 
@@ -126,3 +138,8 @@ hr {
     -ms-border-bottom-right-radius: 5px;
     border-bottom-right-radius: 5px;
 }
+
+/* .titulo {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+} */

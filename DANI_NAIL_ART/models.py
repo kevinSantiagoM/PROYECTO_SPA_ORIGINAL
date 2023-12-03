@@ -3,6 +3,7 @@ from django.core.validators import MinValueValidator
 
 
 class Servicio(models.Model):
+    nombre_usuario = models.CharField(max_length=50)
     nombre = models. CharField(max_length=100)
     descripcion = models.CharField(max_length=100)
     disponibilidad = models.BooleanField()

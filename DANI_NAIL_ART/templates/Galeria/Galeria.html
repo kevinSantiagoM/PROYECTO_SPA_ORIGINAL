@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .galeria-imagen {
+        width: 257px; /* Establece el ancho deseado */
+        height: 350px; /* Establece la altura deseada */
+        margin: 10px; /* Ajusta los márgenes según sea necesario */
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    .tabla_imagen{
+    width: 86%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+<br><br>
+<div class="tabla_imagen">
+    <h2>Galería</h2>
+    <br><hr>
+    <br>
+    {% if imagenes_galeria %}
+    <div class="galeria-container">
+        {% for imagen in imagenes_galeria %}
+        <img class="galeria-imagen" src="{{ imagen.imagen.url }}" alt="Imagen de la Galería">
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No hay imágenes en la galería.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

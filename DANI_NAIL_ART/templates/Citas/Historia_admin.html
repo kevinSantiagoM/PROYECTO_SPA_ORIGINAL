@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Historial de Citas</title>
+</head>
+<body>
+    {% extends "layouts/base_admin.html" %}
+    
+    {% block content %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    
+    <br><br>
+    <div class="historial-citas">
+        <div>
+            <h2>Historial de citas</h2>
+            <div class="Container_botones">
+                <button class="botones" onclick="mostrarCitasDeHoy()">Ver citas de hoy</button>
+                <button class="botones" onclick="mostrarTodasLasCitas()">Mostrar todas las citas</button>
+            </div>
+            <div class="filtro-fechas">
+                <label for="fecha_inicio">Fecha de inicio:</label>
+                <input type="date" id="fecha_inicio">
+    
+                <label for="fecha_fin">Fecha de fin:</label>
+                <input type="date" id="fecha_fin">
+    
+                <button class="botones" onclick="filtrarPorFechas()">Filtrar por fechas</button>
+            </div>
+            <table class="citas-table">
+                
+                <thead>
+                    <tr>
+                        <th>Servicio</th>
+                        <th>Descripcion</th>
+                        <th>Precio</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Cancelar cita</th>
+                    </tr>
+                </thead>
+                
+                <tbody >
+                    {% for cita in citas|dictsort:"hora"|dictsort:"fecha" %}
+                        <tr>
+                            <td>{{ cita.nombre }}</td>
+                            <td>{{ cita.descripcion }}</td>
+                            <td>{{ cita.precio }}</td>
+                            <td>{{ cita.fecha }}</td>
+                            <td>{{ cita.hora|time:"g:i A" }}</td>
+                            <td>
+                                <a href="#" class="eliminar" onclick="confirmDelete('{{ cita.id }}')">Cancelar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+    <script>
+
+        function confirmDelete(citaId) {
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "No podrás revertir esto.",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminarlo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirigir al usuario a la vista de eliminación
+                    window.location.href = "{% url 'eliminar_cita_promo' 0 %}".replace("0", citaId);
+                }
+            });
+        }
+    </script>
+  <script>
+    function mostrarCitasDeHoy() {
+    var today = '{{ today }}';
+    var citasDeHoy = document.querySelectorAll('.citas-table tbody tr td:nth-child(4):not(:first-child)');
+    var anyCitasVisible = false;
+
+    if (citasDeHoy.length > 0) {
+        document.querySelectorAll('.citas-table tbody tr').forEach(function (row) {
+            var fechaCita = row.querySelector('td:nth-child(4)').innerText;
+            if (fechaCita.trim() === today) {
+                row.style.display = '';
+                anyCitasVisible = true;
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    }
+
+    if (!anyCitasVisible) {
+        Swal.fire({
+            title: 'No hay citas para hoy',
+            icon: 'info',
+            confirmButtonText: 'OK'
+        });
+    }
+}
+</script>
+<script>
+    function mostrarTodasLasCitas() {
+        document.querySelectorAll('.citas-table tbody tr').forEach(function (row) {
+            row.style.display = '';
+        });
+    }
+</script>
+
+<script>
+    function filtrarPorFechas() {
+        var fechaInicio = new Date(document.getElementById('fecha_inicio').value);
+        var fechaFin = new Date(document.getElementById('fecha_fin').value);
+
+        // Validar que se hayan ingresado ambas fechas
+        if (isNaN(fechaInicio) || isNaN(fechaFin)) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Por favor, selecciona ambas fechas.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+            return;
+        }
+
+        document.querySelectorAll('.citas-table tbody tr').forEach(function (row) {
+            var fechaCitaText = row.querySelector('td:nth-child(4)').innerText;
+            var fechaCita = new Date(fechaCitaText);
+
+            // Validar si la fecha de la cita está dentro del rango seleccionado
+            if (fechaCita >= fechaInicio && fechaCita <= fechaFin) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+
+        // Mostrar un mensaje si no hay citas en el rango seleccionado
+        var citasFiltradas = document.querySelectorAll('.citas-table tbody tr[style="display:"]');
+        if (citasFiltradas.length === 0) {
+            Swal.fire({
+                title: 'No hay citas en el rango seleccionado',
+                icon: 'info',
+                confirmButtonText: 'OK'
+            });
+        }
+    }
+</script>
+
+    <style>
+.filtro-fechas {
+    margin-top: 10px;
+}
+
+.filtro-fechas label {
+    margin-right: 10px;
+}
+
+.filtro-fechas input {
+    margin-right: 10px;
+}
+
+
+  button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px; /* Añadido un poco más de relleno horizontal */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        border: none; /* Eliminado el borde para un aspecto más limpio */
+        border-radius: 5px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    
+        .eliminar {
+            background-color: red;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+        .historial-citas {
+            width: 80%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .citas-table, .promociones-list {
+            width: 100%;
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+
+        .citas-table th, .citas-table td, .promociones-list li {
+            padding: 10px;
+            border: 1px solid #1b1a1a;
+            border-radius: 10px;
+            text-align: left;
+            
+        }
+
+        .citas-table th {
+            background-color: #ff4081;
+            color: white;
+        }
+
+
+        .promociones {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .promociones-title {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+            margin: 0;
+        }
+
+        .promocion-item {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .promocion-item strong {
+            color: #e44d26;
+        }
+        input{
+        width: 18rem;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box; /* Asegura que el ancho incluya el relleno y el borde */
+        }
+    </style>
+    
+    {% endblock %}
+</body>
+</html>

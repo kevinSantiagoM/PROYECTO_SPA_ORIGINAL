@@ -10,6 +10,7 @@ from .models import Cita, Servicio
 from django.urls import reverse
 from django.contrib import messages
 
+
 def incio(request):
     titulo = "hello bich"
     return render(request, 'Login/inicio.html', {
@@ -52,7 +53,34 @@ def inicio_sesion(request):
 
         login(request, user)
         return redirect('Menu')
-    
+
+# def iniciar_sesion(request):
+
+#     clave_secreta = "12345"
+
+#     usuarios = Usuario.objects.all()
+
+#     datos = json.loads(request.body)
+
+#     for i in usuarios:
+
+#         if i.nombre_usuario == datos ["usuario"] and i.password == datos["password"]:
+
+#             payload={
+
+#                 "id": i.id,
+
+#             }
+
+#             token = jwt.encode(payload, clave_secreta, algorithm='HS256')
+#             break
+
+#         else:
+
+#             token = "Error"
+
+#             return JsonResponse({"token": token})
+
 #----------------------CERRAR SESIÓN-----------------------------
     
 @login_required

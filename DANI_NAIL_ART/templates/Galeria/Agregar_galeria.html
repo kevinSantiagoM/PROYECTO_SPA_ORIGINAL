@@ -1,0 +1,149 @@
+{% extends 'layouts/base_admin.html' %}
+{% load static %}
+{% block content %}
+
+<br><br><br><br>
+<div class="form-container">
+    <h2>Agregar Imágenes a la Galería</h2>
+    <br>
+    <form method="post" enctype="multipart/form-data" class="service-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-button">Subir Imagen</button>
+    </form>
+</div>
+<br>
+<div class="tabla_imagen">
+    <h2>Galería Administrador</h2>
+    <a type="button" class="eliminar" onclick="eliminarImagenes()">Eliminar Imágenes Seleccionadas</a>
+    <div class="galeria-container">
+    <form method="post" id="eliminar-imagenes-form">
+        {% for imagen in imagenes_galeria %}
+        <div class="imagen-container">
+        <input type="checkbox" name="imagenes_seleccionadas" value="{{ imagen.id }}">
+        <img class="galeria-imagen" src="{{ imagen.imagen.url }}" alt="Imagen de la Galería">
+        </div>
+        {% endfor %}
+    </form>
+    </div>
+</div>
+
+<style>
+    .tabla_imagen{
+    width: 86%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
+    }
+    .galeria-imagen {
+    width: 235px; /* Establece el ancho deseado */
+    height: 350px; /* Establece la altura deseada */
+    margin: 10px; /* Ajusta los márgenes según sea necesario */
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    cursor: pointer;
+    }
+
+    .imagen-container {
+    display: inline-block; /* Muestra las imágenes en línea */
+    margin: 0;
+    }
+</style>
+
+<style>
+    .eliminar {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    }
+
+    .form-container {
+    width: 50%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-form {
+    display: flex;
+    flex-direction: column;
+    }
+
+    .service-form input[type="text"],
+    .service-form input[type="number"] {
+    width: 80%;
+    margin-bottom: 10px;
+    margin-top: 1rem;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    }
+
+    .submit-button {
+    background-color: #ff4081;
+    color: white;
+    margin-top: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    }
+
+    .submit-button:hover {
+    background-color: #ff4081;
+    }
+</style>
+
+<script>
+    function eliminarImagenes() {
+    var form = document.getElementById('eliminar-imagenes-form');
+    var checkboxes = form.elements['imagenes_seleccionadas'];
+    var imagenesSeleccionadas = [];
+
+    for (var i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+        imagenesSeleccionadas.push(checkboxes[i].value);
+        }
+    }
+
+    if (imagenesSeleccionadas.length > 0) {
+      // Puedes realizar una solicitud AJAX para enviar la lista de imágenes al servidor
+      // Aquí se muestra un ejemplo utilizando fetch, pero puedes ajustarlo según tu backend
+        fetch('/eliminar_imagenes/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify({ imagenes_seleccionadas: imagenesSeleccionadas })
+        })
+        .then(response => response.json())
+        .then(data => {
+        if (data.success) {
+          // Manejar la respuesta del servidor, por ejemplo, recargar la página
+            location.reload();
+        } else {
+            alert('Error al eliminar imágenes: ' + data.error);
+        }
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+        alert('Selecciona al menos una imagen para eliminar.');
+    }
+    }
+</script>
+
+{% endblock %}
